@@ -1,8 +1,10 @@
 import sqlite3
 
+from db import DB_NAME
+
 
 def run(sql):
-    connection = sqlite3.connect("weather.db")
+    connection = sqlite3.connect(DB_NAME)
     cursor = connection.cursor()
     cursor.execute(sql)
     rows = cursor.fetchall()
@@ -11,4 +13,4 @@ def run(sql):
         print(row)
 
 
-run("SELECT city, COUNT(*) FROM weather GROUP BY city")
+run("SELECT city, COUNT(*) AS readings FROM weather GROUP BY city")

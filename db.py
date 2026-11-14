@@ -1,6 +1,7 @@
+import os
 import sqlite3
 
-DB_NAME = "weather.db"
+DB_NAME = os.getenv("DB_PATH", "weather.db")
 
 
 def create_table():

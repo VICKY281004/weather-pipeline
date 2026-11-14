@@ -54,6 +54,6 @@ ORDER BY avg_temp DESC;
 - [x] Analyse the data with SQL
 - [x] Collect data on a loop
 - [ ] Move to PostgreSQL
-- [ ] Package with Docker
+- [x] Package with Docker
 - [ ] Deploy to the cloud
 - [ ] Add a simple dashboard
