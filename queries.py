@@ -11,4 +11,4 @@ def run(sql):
         print(row)
 
 
-run("SELECT MIN(temperature) FROM weather")
+run("SELECT city, COUNT(*) FROM weather GROUP BY city")
