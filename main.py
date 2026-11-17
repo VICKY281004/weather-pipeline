@@ -5,7 +5,7 @@ import requests
 from weather import get_weather
 from db import create_table, save_weather, show_all
 
-INTERVAL_MINUTES = 15
+INTERVAL_MINUTES = 60
 
 CITIES = {
     "Delhi": (28.61, 77.21),

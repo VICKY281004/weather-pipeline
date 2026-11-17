@@ -1,31 +1,26 @@
 import requests
 
+USER_AGENT = "weather-pipeline-learning github.com/VICKY281004/weather-pipeline"
+
 
 def get_weather(lat, lon):
-    url = "https://api.open-meteo.com/v1/forecast"
-    params = {
-        "latitude": lat,
-        "longitude": lon,
-        "current": "temperature_2m,wind_speed_10m",
-    }
-    response = requests.get(url, params=params, timeout=10)
+    url = "https://api.met.no/weatherapi/locationforecast/2.0/compact"
+    params = {"lat": round(lat, 4), "lon": round(lon, 4)}
+    headers = {"User-Agent": USER_AGENT}
+    response = requests.get(url, params=params, headers=headers, timeout=15)
     response.raise_for_status()
-    data = response.json()
+    first = response.json()["properties"]["timeseries"][0]
+    details = first["data"]["instant"]["details"]
     return {
-        "time": data["current"]["time"],
-        "temperature": data["current"]["temperature_2m"],
-        "wind_speed": data["current"]["wind_speed_10m"],
+        "time": first["time"],
+        "temperature": details["air_temperature"],
+        "wind_speed": details["wind_speed"],
     }
 
 
 if __name__ == "__main__":
     try:
         weather = get_weather(28.61, 77.21)
-        print("Time:", weather["time"])
-        print("Temperature:", weather["temperature"])
-        print("Wind:", weather["wind_speed"])
+        print(weather)
     except requests.RequestException as error:
         print("Request failed:", error)
-
-
-
